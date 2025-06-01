@@ -1,5 +1,5 @@
 import { Box, Button, TextField, Typography } from "@mui/material"
-import axios, { type AxiosResponse } from "axios"
+import { type AxiosResponse } from "axios"
 import React, { useState } from "react"
 import type {
   StrapiLoginPayload,
@@ -8,6 +8,7 @@ import type {
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { login } from "../../auth/authSlice"
+import instance from "../../axios"
 
 interface LoginFormProps {
   setIsInvalidLoginAttempt: (isInvalid: boolean) => void
@@ -26,8 +27,8 @@ const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
       identifier: username,
       password: password,
     }
-    axios
-      .post("http://localhost:1337/api/auth/local", loginPayload)
+    instance
+      .post("/auth/local", loginPayload)
       .then((response: AxiosResponse<StrapiAuthResponse>) => {
         dispatch(login(response.data))
         navigate("/club")

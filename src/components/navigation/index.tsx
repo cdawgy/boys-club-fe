@@ -17,6 +17,7 @@ import Book from "@mui/icons-material/Book"
 import { routes } from "../../routes/routes"
 import { useNavigate } from "react-router-dom"
 import { logout } from "../../auth/authSlice"
+import { useDispatch } from "react-redux"
 
 const NavigationBar: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
@@ -24,6 +25,7 @@ const NavigationBar: React.FC = () => {
     null
   )
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
@@ -164,7 +166,7 @@ const NavigationBar: React.FC = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem key={'logout'} onClick={() => logout()}>
+              <MenuItem key={'logout'} onClick={() => dispatch(logout())}>
                   <Typography sx={{ textAlign: "center" }}>
                     Logout
                   </Typography>

@@ -1,8 +1,6 @@
 import React from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import PrivateRoute from "./private"
-import LoginPage from "../login"
-import Club from "../pages/club"
 import PageContainer from "../components/page-container"
 import type { ParentRoute } from "./Routes.types"
 
