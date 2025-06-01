@@ -32,7 +32,7 @@ const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
         dispatch(login(response.data))
         navigate("/club")
       })
-      .catch((err: Error) => setIsInvalidLoginAttempt(true))
+      .catch(() => setIsInvalidLoginAttempt(true))
   }
 
   const handleSubmit = (event: React.FormEvent) => {

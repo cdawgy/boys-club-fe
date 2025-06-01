@@ -1,4 +1,4 @@
-const Club = () => {
+const Club: React.FC = () => {
   return <p>Club</p>
 }
 

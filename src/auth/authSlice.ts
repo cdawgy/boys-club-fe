@@ -7,6 +7,10 @@ interface AuthState {
     user: StrapiUser | null
 }
 
+interface ReduxAuthState {
+    auth: AuthState
+}
+
 const initialState: AuthState = {
     token: null,
     isAuthenticated: false,
@@ -32,3 +36,4 @@ const authSlice = createSlice({
 
 export const {login, logout} = authSlice.actions
 export default authSlice.reducer
+export type { ReduxAuthState }

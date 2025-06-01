@@ -3,16 +3,48 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import PrivateRoute from "./private"
 import LoginPage from "../login"
 import Club from "../pages/club"
+import PageContainer from "../components/page-container"
+import type { ParentRoute } from "./Routes.types"
 
-const AppRoutes: React.FC = () => {
+interface AppRoutesProps {
+  routes: ParentRoute[]
+}
+
+const generateRoutes = (routes: ParentRoute[]) => {
+  return routes.map((route) => {
+    return (
+      <Route
+        path={route.path}
+        key={route.path}
+        element={route.element ? <route.element /> : null}
+      />
+    )
+  })
+}
+
+const AppRoutes: React.FC<AppRoutesProps> = (props: AppRoutesProps) => {
+  const { routes } = props
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        {generateRoutes(routes.filter((route) => !route.isProtected))}
 
-        {/* Protected Routes */}
         <Route element={<PrivateRoute />}>
-          <Route path="/club" element={<Club />} />
+          <Route element={<PageContainer />}>
+            {generateRoutes(routes.filter((route) => route.isProtected))}
+          </Route>
+        </Route>
+
+        <Route element={<PageContainer />}>
+          <Route
+            path="*"
+            element={
+              <div>
+                <h1>404 - Page Not Found</h1>
+              </div>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>
