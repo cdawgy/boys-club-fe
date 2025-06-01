@@ -21,4 +21,4 @@ type StrapiLoginPayload = {
     password: string
 }
 
-export type { StrapiAuthResponse, StrapiLoginPayload }
+export type { StrapiAuthResponse, StrapiLoginPayload, StrapiUser }
